@@ -53,7 +53,7 @@ fn generate_maze_wilson(h: usize, w: usize) -> (Maze, (usize, usize), (usize, us
     // 优化：虽然可以维护一个列表，但随着迷宫变大，随机取坐标并判断是否在迷宫内更简单
     while unvisited_count > 0 {
         // A. 随机选一个还不在迷宫中的点作为起点
-        let mut curr;
+        let curr;
         loop {
             let ry = rng.gen_range(0..h);
             let rx = rng.gen_range(0..w);

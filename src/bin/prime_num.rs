@@ -10,7 +10,7 @@ fn is_prime(num: u64) -> bool {
         return true;
     }
     // 排除掉所有偶数
-    if num % 2 == 0 {
+    if num.is_multiple_of(2) {
         return false;
     }
 
@@ -20,7 +20,7 @@ fn is_prime(num: u64) -> bool {
     // 从 3 开始，步长为 2 (只检查奇数：3, 5, 7...)
     // 这样效率更高，且符合 Rust 常见写法
     for i in (3..=limit).step_by(2) {
-        if num % i == 0 {
+        if num.is_multiple_of(i) {
             return false;
         }
     }
@@ -28,7 +28,7 @@ fn is_prime(num: u64) -> bool {
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let max_x: u64 = 1000000;
+    let max_x: u64 = 10000;
 
     // 准备数据
     let mut data: Vec<(f32, f32)> = Vec::new();
@@ -50,7 +50,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .margin(10)
         .x_label_area_size(40)
         .y_label_area_size(40)
-        .build_cartesian_2d(0f32..1000000f32, 0f32..100000f32)?;
+        .build_cartesian_2d(0f32..10000f32, 0f32..10000f32)?;
 
     chart.configure_mesh().draw()?;
 
@@ -72,7 +72,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     root.present()?;
 
-    println!("绘制完成！无警告版本。请查看: prime_plot.png");
+    println!("绘制完成！请查看: prime_plot.png");
 
     Ok(())
 }
