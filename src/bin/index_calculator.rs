@@ -1,6 +1,6 @@
 fn main() {
-    let basis: i16 = 9;
-    let lar_num: i128 = 83264583246582346583384562;
+    let basis: i16 = 13;
+    let lar_num: i128 = 832645832946582346583384562;
 
     let index: i128 = lar_num.ilog(basis as i128) as i128;
     println!(
