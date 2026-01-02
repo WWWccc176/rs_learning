@@ -1,7 +1,5 @@
 use minifb::{Key, Window, WindowOptions};
 use rand::prelude::*;
-use std::thread;
-use std::time::Duration;
 
 // --- 配置参数 ---
 const H: usize = 100; // 迷宫高度 (格子数)
@@ -15,7 +13,6 @@ const GRID_W: usize = 2 * W + 1;
 // 颜色定义 (0x00RRGGBB)
 const COLOR_WALL: u32 = 0x000000; // 黑
 const COLOR_PATH: u32 = 0xFFFFFF; // 白
-const COLOR_TEMP: u32 = 0xFF0000; // 红 (正在寻找的路径)
 const COLOR_START: u32 = 0x00FF00; // 绿 (入口)
 const COLOR_EXIT: u32 = 0x0000FF; // 蓝 (出口)
 
@@ -67,7 +64,7 @@ fn main() {
         // 如果迷宫还没生成完，继续跑算法
         if unvisited_count > 0 {
             // A. 找一个不在迷宫的点
-            let mut curr;
+            let curr;
             loop {
                 let ry = rng.gen_range(0..H);
                 let rx = rng.gen_range(0..W);
