@@ -3,7 +3,7 @@ use std::f64::consts::PI;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 1. 设置参数 n 从 30 到 1000
-    let n_list: Vec<usize> = (30..=500).step_by(2).collect();
+    let n_list: Vec<usize> = (30..=1000).step_by(2).collect();
 
     // 2. 准备评估点 s = -10:0.05:10
     // 手动生成 grid
