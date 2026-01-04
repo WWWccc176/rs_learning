@@ -960,6 +960,7 @@ dependencies = [
  "minifb",
  "plotters",
  "rand",
+ "rayon",
 ]
 
 [[package]]

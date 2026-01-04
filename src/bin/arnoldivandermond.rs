@@ -87,7 +87,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     // --- 功能 2: 画图 (Log-Log Plot) ---
-    println!("\nGenerating plot: loglog_error.png ...");
+    println!("\nGenerating plot: loglog_error.png.");
     draw_loglog_plot(&plot_data)?;
     println!("Done.");
 
@@ -208,8 +208,10 @@ fn arnoldi_cheb_vand_fit(
 
     // 3. 系数 d
     let mut d = Vec::with_capacity(m);
-    for i in 0..m {
-        let dot: f64 = q_cols[i].iter().zip(&fx).map(|(a, b)| a * b).sum();
+    // 修改前：for i in 0..m { ... q_cols[i] ... }
+    // 修改后：直接遍历 q_cols
+    for col in &q_cols {
+        let dot: f64 = col.iter().zip(&fx).map(|(a, b)| a * b).sum();
         d.push(dot / (m as f64));
     }
 
