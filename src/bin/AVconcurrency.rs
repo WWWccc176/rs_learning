@@ -114,7 +114,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 // 绘图函数保持不变...
 fn draw_loglog_plot(data: &[(f64, f64)]) -> Result<(), Box<dyn std::error::Error>> {
-    let root = BitMapBackend::new("loglog_error.png", (800, 600)).into_drawing_area();
+    let root = BitMapBackend::new("loglog_error_par.png", (800, 600)).into_drawing_area();
     root.fill(&WHITE)?;
     let min_x = data.first().unwrap().0;
     let max_x = data.last().unwrap().0;
