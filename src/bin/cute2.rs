@@ -7,7 +7,7 @@ fn main() {
     let img_path = if args.len() > 1 {
         &args[1]
     } else {
-        "images/cute.png"
+        "images/cute2.jpg"
     };
 
     println!("正在处理图片: {}", img_path);

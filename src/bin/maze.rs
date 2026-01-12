@@ -302,7 +302,7 @@ fn main() {
     let dist = bfs_cpu(&maze, start);
 
     // 3. 绘图
-    render_maze_image(&maze, &dist, start, exit_pos, "maze_rust.png");
+    render_maze_image(&maze, &dist, start, exit_pos, "outputs/maze_rust.png");
 
     println!("Done! Check maze_rust.png");
 }

@@ -143,6 +143,7 @@ fn main() {
             // thread::sleep(Duration::from_millis(5));
         } else {
             // 生成完成！绘制出口
+
             // 出口 (H-1, W-2) -> 右边开口
             let (ey, ex) = (H - 1, W - 2);
             set_grid_color(&mut grid_colors, 2 * ey + 1, 2 * ex + 2, COLOR_EXIT);

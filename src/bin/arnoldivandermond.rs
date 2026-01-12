@@ -97,7 +97,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 /// 使用 plotters 绘制 Log-Log 图
 fn draw_loglog_plot(data: &[(f64, f64)]) -> Result<(), Box<dyn std::error::Error>> {
     // 创建绘图后端，分辨率 800x600，输出为 png 文件
-    let root = BitMapBackend::new("loglog_error.png", (800, 600)).into_drawing_area();
+    let root = BitMapBackend::new("outputs/loglog_error.png", (800, 600)).into_drawing_area();
     root.fill(&WHITE)?;
 
     // 自动寻找坐标轴范围

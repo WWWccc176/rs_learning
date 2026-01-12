@@ -1,10 +1,14 @@
-use image::{GenericImageView, imageops::FilterType, Rgba};
+use image::{GenericImageView, Rgba, imageops::FilterType};
 use std::env;
 
 fn main() {
     // 1. 获取图片路径 (这里为了方便，如果没有参数默认读取 'cute.jpg')
     let args: Vec<String> = env::args().collect();
-    let img_path = if args.len() > 1 { &args[1] } else { "cute1.jpeg" };
+    let img_path = if args.len() > 1 {
+        &args[1]
+    } else {
+        "images/cute1.JPG"
+    };
 
     println!("正在处理图片: {}", img_path);
 
@@ -21,7 +25,7 @@ fn main() {
     // 终端一行通常在 80-120 字符左右。
     // 这张图比较宽，我们设置宽度为 80，高度会自动计算。
     let target_width = 80;
-    
+
     // 计算目标高度。
     // 注意：因为我们用 "▀" 字符，一个字符包含垂直的2个像素。
     // 所以我们在缩放时，要保持原本的宽高比，不用像普通ASCII那样把高度减半。
@@ -47,13 +51,13 @@ fn generate_utf8_art(img: &image::DynamicImage, width: u32, height: u32) -> Stri
         for x in 0..width {
             // 获取上半部分像素 (前景色)
             let top_pixel = img.get_pixel(x, y);
-            
+
             // 获取下半部分像素 (背景色)
             // 处理边界：如果是最后一行且是奇数行，下面没有像素了，就设为透明/黑色
             let bottom_pixel = if y + 1 < height {
                 img.get_pixel(x, y + 1)
             } else {
-                Rgba([0, 0, 0, 0]) 
+                Rgba([0, 0, 0, 0])
             };
 
             // 拼接 ANSI 转义序列
@@ -62,8 +66,12 @@ fn generate_utf8_art(img: &image::DynamicImage, width: u32, height: u32) -> Stri
             // ▀ 字符利用前景色填满上半格，背景色填满下半格
             let chunk = format!(
                 "\x1b[38;2;{r1};{g1};{b1}m\x1b[48;2;{r2};{g2};{b2}m▀",
-                r1 = top_pixel[0], g1 = top_pixel[1], b1 = top_pixel[2],
-                r2 = bottom_pixel[0], g2 = bottom_pixel[1], b2 = bottom_pixel[2]
+                r1 = top_pixel[0],
+                g1 = top_pixel[1],
+                b1 = top_pixel[2],
+                r2 = bottom_pixel[0],
+                g2 = bottom_pixel[1],
+                b2 = bottom_pixel[2]
             );
             result.push_str(&chunk);
         }
@@ -73,3 +81,4 @@ fn generate_utf8_art(img: &image::DynamicImage, width: u32, height: u32) -> Stri
 
     result
 }
+

@@ -42,7 +42,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     // --- 开始绘图 ---
-    let root = BitMapBackend::new("prime_plot.png", (50000, 37500)).into_drawing_area();
+    let root = BitMapBackend::new("outputs/prime_plot.png", (50000, 37500)).into_drawing_area();
     root.fill(&WHITE)?;
 
     let mut chart = ChartBuilder::on(&root)
