@@ -198,8 +198,8 @@ fn bfs_cpu(maze: &Maze, start: (usize, usize)) -> Vec<Vec<i32>> {
 /// 渲染结果为图片
 fn render_maze_image(
     maze: &Maze,
-    dist: &Vec<Vec<i32>>,
-    start: (usize, usize),
+    dist: &[Vec<i32>],
+    _start: (usize, usize),
     exit_pos: (usize, usize),
     filename: &str,
 ) {
@@ -217,20 +217,11 @@ fn render_maze_image(
     }
 
     // 找到最大距离用于归一化颜色 (BFS的最远端)
-    let mut max_dist = 1;
-    for r in 0..h {
-        for c in 0..w {
-            if dist[r][c] > max_dist {
-                max_dist = dist[r][c];
-            }
-        }
-    }
+    let max_dist = *dist.iter().flatten().max().unwrap_or(&1);
 
     // 2. 绘制迷宫内部
-    for r in 0..h {
-        for c in 0..w {
-            let d = dist[r][c];
-
+    for (r, row) in dist.iter().enumerate() {
+        for (c, &d) in row.iter().enumerate() {
             // 计算颜色 (简单的热力图: 黑 -> 红 -> 黄 -> 白)
             // 这里为了简单，我们用 Pink 风格 (类似 matplotlib pink)
             // 距离越远，颜色越亮/暖

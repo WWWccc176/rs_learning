@@ -167,18 +167,18 @@ fn main() {
 }
 
 // 辅助函数：设置 Grid 颜色
-fn set_grid_color(grid: &mut Vec<Vec<u32>>, r: usize, c: usize, color: u32) {
+fn set_grid_color(grid: &mut [Vec<u32>], r: usize, c: usize, color: u32) {
     if r < grid.len() && c < grid[0].len() {
         grid[r][c] = color;
     }
 }
 
 // 辅助函数：把 Grid 放大并拷贝到 Framebuffer
-fn render_grid_to_buffer(grid: &Vec<Vec<u32>>, buffer: &mut Vec<u32>, win_w: usize) {
-    for r in 0..grid.len() {
-        for c in 0..grid[0].len() {
-            let color = grid[r][c];
-
+fn render_grid_to_buffer(grid: &[Vec<u32>], buffer: &mut [u32], win_w: usize) {
+    for (r, row) in grid.iter().enumerate() {
+        // 2. 内层循环：同时拿 列索引(c) 和 像素颜色(&color)
+        // 注意：这里的 &color 是模式匹配，自动把引用的值解出来了
+        for (c, &color) in row.iter().enumerate() {
             // 绘制 SCALE x SCALE 的矩形
             for sy in 0..SCALE {
                 for sx in 0..SCALE {
