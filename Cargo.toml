@@ -11,15 +11,17 @@ plotters = "0.3.5"
 log = "0.4"
 minifb = "0.24"
 rayon = "1.10"
+num = "0.4"
+crossbeam = "0.8"
 
 
 [profile.release]
-opt-level = 3       # 3 代表 O3 (默认就是3，这里是显式写出来)
-lto = true          # 【强烈推荐】开启链接时优化，体积更小，运行更快，但编译时间变长
-codegen-units = 1   # 【强烈推荐】牺牲并行编译速度，换取生成的代码执行速度更快
+opt-level = 3     # 3 代表 O3 (默认就是3，这里是显式写出来)
+lto = true        # 【强烈推荐】开启链接时优化，体积更小，运行更快，但编译时间变长
+codegen-units = 1 # 【强烈推荐】牺牲并行编译速度，换取生成的代码执行速度更快
 
 [profile.dev]
-opt-level = 1       # 开发模式稍微优化一下，不然跑简单的模型测试都太慢
+opt-level = 1 # 开发模式稍微优化一下，不然跑简单的模型测试都太慢
 
 #根据CPU优化
 #RUSTFLAGS="-C target-cpu=native"
