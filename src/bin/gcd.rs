@@ -14,7 +14,7 @@ fn gcd(mut x: i32, mut y: i32) -> i32 {
             y = t;
             x = y;
         }
-        x = x % y
+        x %= y
     }
     x
 }
