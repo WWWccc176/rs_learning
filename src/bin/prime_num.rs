@@ -42,7 +42,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     // --- 开始绘图 ---
-    let root = BitMapBackend::new("outputs/prime_plot.png", (50000, 37500)).into_drawing_area();
+    let root = BitMapBackend::new("outputs/prime_plot.png", (1600, 1200)).into_drawing_area();
     root.fill(&WHITE)?;
 
     let mut chart = ChartBuilder::on(&root)
@@ -50,7 +50,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .margin(10)
         .x_label_area_size(40)
         .y_label_area_size(40)
-        .build_cartesian_2d(0f32..10000f32, 0f32..10000f32)?;
+        .build_cartesian_2d(0f32..10000f32, 0f32..1400f32)?;
 
     chart.configure_mesh().draw()?;
 
@@ -59,7 +59,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     chart
         .draw_series(LineSeries::new(
-            data, RED, // 修改点：直接使用 RED，去掉 &
+            data.iter().map(|&(x, y)| (x, y)), // 使用迭代器
+            RED.stroke_width(2),               // 指定线宽
         ))?
         .label("y = π(x)")
         .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], RED)); // 修改点：直接使用 RED
