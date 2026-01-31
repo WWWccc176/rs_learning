@@ -5,20 +5,14 @@ fn is_prime(num: u64) -> bool {
     if num <= 1 {
         return false;
     }
-    // 单独处理 2，它是唯一的偶数素数
     if num == 2 {
         return true;
     }
-    // 排除掉所有偶数
     if num.is_multiple_of(2) {
         return false;
     }
-
-    // 计算平方根上限
     let limit = (num as f64).sqrt() as u64;
 
-    // 从 3 开始，步长为 2 (只检查奇数：3, 5, 7...)
-    // 这样效率更高，且符合 Rust 常见写法
     for i in (3..=limit).step_by(2) {
         if num.is_multiple_of(i) {
             return false;
