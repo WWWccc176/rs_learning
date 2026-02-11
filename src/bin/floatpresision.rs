@@ -7,9 +7,11 @@ fn main() {
     let bb: f64 = b + b + b + b + b + b + b + b + b + b;
     let cc: f32 = c + c + c + c + c + c + c + c + c + c;
     let dd: f64 = d + d + d + d + d + d + d + d + d + d;
+    let bbb:f64=b*10.;
 
-    println!("{:.20}", aa);
-    println!("{:.20}", bb);
-    println!("{:.20}", cc);
-    println!("{:.20}", dd);
+    println!("{:.25}", aa);
+    println!("{:.25}", bb);
+    println!("{:.25}", cc);
+    println!("{:.25}", dd);
+    println!("{:.25}", bbb);
 }
