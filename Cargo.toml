@@ -5,15 +5,15 @@ edition = "2024"
 
 
 [dependencies]
-rand = "0.8"
-image = "0.24"
+rand = "0.10.0"
+image = "0.25.9"
 plotters = "0.3.5"
-log = "0.4"
-minifb = "0.24"
+log = "0.4.29"
+minifb = "0.28.0"
 rayon = "1.10"
 num = "0.4"
 crossbeam = "0.8"
-ndarray="0.15"
+ndarray="0.17.2"
 
 
 [profile.release]

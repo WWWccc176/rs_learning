@@ -1,5 +1,5 @@
 use image::{ImageBuffer, Rgb, RgbImage};
-use rand::prelude::*;
+use rand::RngExt;
 use std::collections::VecDeque;
 use std::path::Path;
 
@@ -32,7 +32,7 @@ impl Maze {
 /// Wilson 算法生成迷宫
 /// 返回：(迷宫结构体, 起点, 终点)
 fn generate_maze_wilson(h: usize, w: usize) -> (Maze, (usize, usize), (usize, usize)) {
-    let mut rng = thread_rng();
+    let mut rng = rand::rng();
     let mut maze = Maze::new(h, w);
 
     // 1. 访问标记 (true = 未访问, false = 已访问)
@@ -55,8 +55,8 @@ fn generate_maze_wilson(h: usize, w: usize) -> (Maze, (usize, usize), (usize, us
         // A. 随机选一个还不在迷宫中的点作为起点
         let curr;
         loop {
-            let ry = rng.gen_range(0..h);
-            let rx = rng.gen_range(0..w);
+            let ry = rng.random_range(0..h);
+            let rx = rng.random_range(0..w);
             if !in_maze[ry][rx] {
                 curr = (ry, rx);
                 break;
@@ -76,7 +76,7 @@ fn generate_maze_wilson(h: usize, w: usize) -> (Maze, (usize, usize), (usize, us
             }
 
             // 随机走一步
-            let (dr, dc) = DIRS[rng.gen_range(0..4)];
+            let (dr, dc) = DIRS[rng.random_range(0..4)];
             let nr = cr as isize + dr;
             let nc = cc as isize + dc;
 

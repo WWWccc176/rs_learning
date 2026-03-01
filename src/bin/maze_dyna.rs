@@ -1,5 +1,5 @@
 use minifb::{Key, Window, WindowOptions};
-use rand::prelude::*;
+use rand::RngExt;
 
 // --- 配置参数 ---
 const H: usize = 100; // 迷宫高度 (格子数)
@@ -32,7 +32,7 @@ fn main() {
     });
 
     // 限制帧率，大约 60fps，防止风扇狂转
-    window.limit_update_rate(Some(std::time::Duration::from_micros(16600)));
+    window.set_target_fps(60);
 
     // 2. 像素缓冲区 (存储当前画面的颜色)
     // 逻辑大小是 GRID_W * GRID_H，我们最后渲染时再放大
@@ -50,7 +50,7 @@ fn main() {
     set_grid_color(&mut grid_colors, 1, 0, COLOR_START);
 
     // 4. Wilson 算法状态
-    let mut rng = thread_rng();
+    let mut rng = rand::rng();
     let mut in_maze = vec![vec![false; W]; H];
     let start = (0, 0);
     in_maze[start.0][start.1] = true;
@@ -66,8 +66,8 @@ fn main() {
             // A. 找一个不在迷宫的点
             let curr;
             loop {
-                let ry = rng.gen_range(0..H);
-                let rx = rng.gen_range(0..W);
+                let ry = rng.random_range(0..H);
+                let rx = rng.random_range(0..W);
                 if !in_maze[ry][rx] {
                     curr = (ry, rx);
                     break;
@@ -88,7 +88,7 @@ fn main() {
                     break;
                 } // 撞墙了
 
-                let (dr, dc) = dirs[rng.gen_range(0..4)];
+                let (dr, dc) = dirs[rng.random_range(0..4)];
                 let nr = cr as isize + dr;
                 let nc = cc as isize + dc;
 
