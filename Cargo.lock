@@ -1648,6 +1648,7 @@ dependencies = [
  "minifb",
  "ndarray",
  "num",
+ "num-bigint",
  "plotters",
  "rand 0.10.0",
  "rayon",
