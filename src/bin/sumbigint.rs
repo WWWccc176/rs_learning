@@ -110,4 +110,3 @@ fn main() {
     let sum_str = sum.to_string();
     println!("{}", &sum_str[..10]);
 }
-
