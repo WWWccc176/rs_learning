@@ -75,7 +75,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 max_err = err;
             }
         }
-
         // --- 功能 1: 终端输出 ---
         println!("{:<5} | {:<15.8e}", n, max_err);
 
